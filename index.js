@@ -67,6 +67,13 @@ async function run() {
       const filter={_id: new ObjectId(id)};
       const updateBooking=req.body;
       console.log(updateBooking)
+      const updateDoc={
+        $set:{
+          status:updateBooking.status
+        }
+      }
+      const result=await bookingsCollection.updateOne(filter,updateDoc);
+      res.send(result)
     })
 
     app.post("/bookings", async (req, res) => {
